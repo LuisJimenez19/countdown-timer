@@ -4,7 +4,7 @@
 
 body {
   font-family: "Red Hat Text", sans-serif;
-  background: url(/images/bg-stars.svg) center;
+  background: url(./images/bg-stars.svg) center;
 }
 
 /* Efecto de bisel */
