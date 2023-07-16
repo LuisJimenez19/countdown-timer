@@ -1,0 +1,143 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: "Red Hat Text", sans-serif;
+  background: url(/images/bg-stars.svg) center;
+}
+
+/* Efecto de bisel */
+.cutdown-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.cutdown-container::after,
+.cutdown-container::before {
+  content: "";
+  height: 7px;
+  width: 5px;
+  transform: translateY(-50%);
+  top: calc(50% - 14px);
+  bottom: 50%;
+  z-index: 100;
+
+  /* border-radius: 50%; */
+  position: absolute;
+  background-color: rgba(2, 2, 2, 0.671);
+}
+
+.cutdown-container::after {
+  left: 0;
+  border-radius: 0 50% 50% 0;
+}
+.cutdown-container::before {
+  border-radius: 50% 0 0 50%;
+  right: 0px;
+}
+
+.coutdown {
+  min-width: 70px;
+  height: 70px;
+  box-shadow: 0 8px 5px rgba(0, 0, 0, 0.629);
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  user-select: none;
+  perspective: 800px;
+  /*  transform: perspective(600px) rotateY(-8deg);
+    transform-style: preserve-3d; */
+}
+
+.coutdown-overlay {
+  position: absolute;
+  z-index: -1;
+  backface-visibility: hidden;
+}
+
+.coutdown-overlay.active {
+  z-index: 1;
+  animation: flip-horizontal-bottom 1s linear forwards infinite;
+  animation-delay: 1s; /**/
+}
+
+.coutdown span {
+  font-size: 2em;
+}
+/* Efecto de que esta plegado */
+.coutdown::before {
+  content: "";
+  height: 50%;
+  width: 101%;
+  position: absolute;
+  top: 0;
+  perspective: 800px;
+
+  background-color: rgba(0, 0, 0, 0.264);
+}
+
+.coutdown::after {
+  content: "";
+  height: 50%;
+  width: 100%;
+  position: absolute;
+  transform: perspective(600px) rotateY(360deg);
+  top: 0;
+}
+
+/* ----------------FOOTER-------------------- */
+.footer {
+  background-image: url(/images/pattern-hills.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+@media (min-width: 768px) {
+  .coutdown {
+    /* padding: 35px 32px; */
+    min-width: 150px;
+    height: 140px;
+  }
+  .coutdown span {
+    font-size: 4em;
+  }
+  .cutdown-container::after,
+  .cutdown-container::before {
+    height: 10px;
+    width: 7px;
+    top: calc(50% - 16px);
+  }
+}
+
+@keyframes flip-horizontal-bottom {
+  0% {
+    /* -webkit-transform: rotateX(0);
+      transform: rotateX(0); */
+
+    transform: rotateX(90deg);
+  }
+  100% {
+    /* -webkit-transform: rotateX(-180deg);
+      transform: rotateX(-180deg); */
+    transform: rotateX(0deg);
+  }
+}
+
+/* Convertir los milisegundos restantes a días, horas, minutos y segundos:
+  Después de obtener la diferencia en milisegundos, queremos convertirla a días, horas, minutos y segundos para mostrarla en la cuenta regresiva. Aquí es cómo lo hacemos:
+  
+  Segundos: Tomamos la diferencia en milisegundos y la dividimos por 1000 (1 segundo = 1000 
+  milisegundos). Utilizamos Math.floor() para redondear hacia abajo y obtener la parte entera de la 
+  división, ignorando los milisegundos restantes.
+  
+  Minutos: Tomamos los segundos calculados en el paso anterior y los dividimos por 60 (1 minuto = 60 
+  segundos). Nuevamente, utilizamos Math.floor() para obtener la parte entera de la división.
+  
+  Horas: Tomamos los minutos calculados y los dividimos por 60 (1 hora = 60 minutos). Redondeamos hacia 
+  abajo utilizando Math.floor().
+  
+  Días: Finalmente, tomamos las horas calculadas y las dividimos por 24 (1 día = 24 horas). Redondeamos 
+  hacia abajo utilizando Math.floor(). */
